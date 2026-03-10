@@ -1,0 +1,36 @@
+﻿Credit Name: Chapter 3
+Assignment Name: Tic Tac Toe (and GUIs / Event Driven)
+
+The following questions can help you in thinking critically about your problem-solving processes:
+
+Understanding the Problem
+How did you approach understanding the challenge?
+I read the requirements for creating an interactive graphical user interface using Java Swing. For Tic Tac Toe, the goal was to create a 3x3 grid of buttons that alternate between X and O while checking for a winner. For BankAccount and BreakAPlate, the goal was to integrate existing backend logic with a new dynamic frontend.
+
+Were there any parts of the problem you found confusing at first? If so, how did you resolve that confusion?
+At first, connecting the visual UI components (like JButton and JTextField) to actual Java backend logic was tricky. I resolved this by learning how to use ActionListeners and MouseAdapters, which bridge the gap between user clicks and code execution.
+
+Planning the Solution
+Did you create a plan or break the problem into smaller steps before coding?
+Yes, for each program, I started by designing the layout (panels, buttons, labels) and then moved on to wiring up the events. I also reviewed the Code Standards document beforehand to ensure I was using constants instead of magic numbers and properly formatting my braces across all three apps.
+
+How did you decide on the tools, data structures, or algorithms to use?
+I used standard Java Swing components (JFrame, JPanel, JButton) and layout managers (BorderLayout, GridLayout, BoxLayout). For Tic Tac Toe, a 2D array of `JButton`s (`JButton[][]`) was the perfect data structure to visually represent the 3x3 grid and easily iterate to check rows, columns, and diagonals for a win.
+
+Implementation
+Did you write the code in small pieces or attempt the entire solution at once?
+I wrote the code piece by piece. For example, in BreakAPlate, I first built the GameBooth class to handle the random number generation and prize logic. Then, I built the GUI layout, and finally linked the "Play" button to the GameBooth's start() method.
+
+How did you test your solution along the way to make sure it was working?
+I tested frequently by compiling and running the applications after adding major features. I ran Tic Tac Toe after setting up the visual grid to ensure it displayed correctly, and then again after implementing the win-checking algorithm.
+
+Overcoming Challenges
+What part of the problem was the most difficult for you?
+The most difficult part was dealing with Eclipse's compilation quirks, particularly the "Unresolved compilation problem." Sometimes Eclipse wouldn't recognize that I had fixed a syntax error or added a necessary file to the package.
+
+How did you handle moments when you felt stuck or unsure of what to do next?
+When stuck on the compilation errors, I investigated the `bin/` directory and researched how Eclipse handles `.class` files. Using the "Project -> Clean" tool proved to be a reliable way to fix those environment issues.
+
+Learning
+Was there anything you learned that you think will help you with future challenges?
+I learned how crucial it is to follow strict Code Standards—like avoiding magic numbers, properly formatting brackets, and organizing variables. I also learned a lot about Event-Driven programming (ActionListeners) which will be essential for making any interactive applications in the future.

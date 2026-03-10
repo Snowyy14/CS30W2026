@@ -1,0 +1,21 @@
+﻿Credit Name: Chapter 3
+Assignment Name: GUI and Event Driven
+
+Error Log Entry
+
+What error message did you encounter (if any)?
+Exception in thread main java.lang.Error: Unresolved compilation problem: at Mastery.BreakAPlate.main(BreakAPlate.java:107) (and a similar Unresolved compilation problem for BankAccount). Also encountered ClassNotFoundException later.
+
+What unexpected behavior did your program exhibit?
+The program refused to run in Eclipse. Instead of launching the GUI, it immediately crashed in the console citing that the main class couldn't be loaded or that there were compilation problems, even though the visible code in the editor was completely correct.
+
+What caused the issue? (e.g., syntax error, logic error, incorrect function usage, etc.)
+The issue was caused by Eclipse's build environment and classpath rules. In BankAccount, it was because the dependent backend classes (Bank, Account, Customer) were missing the package Mastery; declaration. In BreakAPlate, it was due to a minor syntax error (a typo in an ImageIcon variable name). Even after the typo was fixed, Eclipse had cached the broken .class files and didn't automatically rebuild the project, causing it to run the outdated, broken version.
+
+Include a screenshot of specific lines of code.
+
+
+How did you fix the issue?
+For BankAccont, I merged the Bank, Account, and Customer classes directly into the BankAccount.java file so Eclipse could compile everything as one cohesive unit in the Mastery package. For BreakAPlate, I forced Eclipse to reconstruct its environment by going to the top menu, clicking Project -> Clean..., and checking Build Automatically. This cleared out the broken .clas` files in the bin/ folder and generated fresh, working ones.
+
+Provide the corrected code or solution using a screenshot.
