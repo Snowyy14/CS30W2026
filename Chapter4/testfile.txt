@@ -1,0 +1,3 @@
+Java Programming Assignment
+This is a test file for the CountVowels program.
+It contains several lines of text with various vowels.

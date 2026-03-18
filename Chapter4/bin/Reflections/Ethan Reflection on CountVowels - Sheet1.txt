@@ -1,0 +1,50 @@
+Credit Name: Chapter 4
+Assignment Name: CountVowels
+
+The following questions can help you in thinking critically about your problem-solving processes:
+
+Understanding the Problem
+How did you approach understanding the challenge?
+I understood that I needed to read a text file and count how many vowels (a, e, i, o, u)
+appear in it. The program prompts the user for the file name, reads it line by line,
+and checks each character.
+
+Were there any parts of the problem you found confusing at first? If so, how did you resolve that confusion?
+I had to think about how to handle uppercase vs lowercase letters. I resolved this by
+converting each line to lowercase before checking for vowels, so both "A" and "a" are
+counted the same way.
+
+Planning the Solution
+Did you create a plan or break the problem into smaller steps before coding?
+Yes, I planned it in steps: prompt for file name, open the file with FileReader and
+BufferedReader, read each line, convert to lowercase, iterate through each character,
+check if it's a vowel, and keep a running count.
+
+How did you decide on the tools, data structures, or algorithms to use?
+I used File, FileReader, and BufferedReader for file I/O as shown in the template.
+A while loop reads lines until null, and a for loop iterates through each character.
+String.valueOf() converts characters to strings for comparison.
+
+Implementation
+Did you write the code in small pieces or attempt the entire solution at once?
+I built it section by section: first the file opening, then the line reading loop,
+then the character checking logic, and finally the exception handling.
+
+How did you test your solution along the way to make sure it was working?
+I created a test text file and ran the program to verify the vowel count matched
+what I expected from manually counting.
+
+Overcoming Challenges
+What part of the problem was the most difficult for you?
+Setting up the file I/O with the try-catch blocks was the most involved part.
+I needed to handle both FileNotFoundException and IOException properly.
+
+How did you handle moments when you felt stuck or unsure of what to do next?
+I referred to the template comments which guided me through each step of the
+file reading process.
+
+Learning
+Was there anything you learned that you think will help you with future challenges?
+I learned how to read files line by line using BufferedReader and how to properly
+handle file I/O exceptions in Java. The pattern of reading until null is useful
+for any file processing task.

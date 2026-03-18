@@ -1,0 +1,56 @@
+Credit Name: Chapter 4
+Assignment Name: StudentSemesterAverage
+
+The following questions can help you in thinking critically about your problem-solving processes:
+
+Understanding the Problem
+How did you approach understanding the challenge?
+I studied the reference screenshots to understand the GUI layout and functionality.
+The application needs input fields for student name, grade level, semester number,
+and four grades. It calculates an average, saves data to a file, and can display
+all saved records.
+
+Were there any parts of the problem you found confusing at first? If so, how did you resolve that confusion?
+I needed to figure out how to structure the layout with labels on the left and text
+fields on the right, plus a text area below and buttons at the bottom. I resolved
+this by using BorderLayout for the frame with a GridLayout panel at the top for
+the input fields.
+
+Planning the Solution
+Did you create a plan or break the problem into smaller steps before coding?
+Yes, I broke it into: 1) Build the input form with labels and text fields,
+2) Add the text area for file display, 3) Add the Save and View buttons,
+4) Implement the save logic with file writing, 5) Implement the view logic
+with file reading, 6) Add average calculation.
+
+How did you decide on the tools, data structures, or algorithms to use?
+I used JFrame, JPanel, JLabel, JTextField, JTextArea, and JButton from Swing.
+GridLayout was used for the form area. FileWriter with append mode for saving,
+and BufferedReader for reading the file.
+
+Implementation
+Did you write the code in small pieces or attempt the entire solution at once?
+I built it in sections: first the GUI layout, then the Save button functionality
+with file writing, then the View button with file reading, and finally the
+average calculation and display.
+
+How did you test your solution along the way to make sure it was working?
+I tested by entering sample student data, clicking Save to File, verifying the
+confirmation dialog, and then clicking View File Contents to see if the data
+appeared correctly in the text area.
+
+Overcoming Challenges
+What part of the problem was the most difficult for you?
+Getting the layout to match the reference screenshots was the most challenging
+part. I needed the form fields aligned properly and the text area to fill the
+remaining space.
+
+How did you handle moments when you felt stuck or unsure of what to do next?
+I referred to the SemesterAvg example from the textbook which showed how to use
+JTextField with ActionListener, parse doubles, and structure a GUI application.
+
+Learning
+Was there anything you learned that you think will help you with future challenges?
+I learned how to combine file I/O with a GUI application. Using FileWriter in
+append mode to save multiple records and BufferedReader to read them back was
+a useful pattern. I also learned how to use JOptionPane for dialog messages.

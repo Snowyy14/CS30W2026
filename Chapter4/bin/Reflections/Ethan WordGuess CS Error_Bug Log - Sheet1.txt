@@ -1,0 +1,30 @@
+Credit Name: Chapter 4
+Assignment Name: WordGuess
+
+Error Log Entry
+
+What error message did you encounter (if any)?
+There were no major errors when making the program there was only minor issues
+included ensuring the flag comparison worked correctly with the uppercase conversion
+
+What unexpected behavior did your program exhibit?
+Nope the template helped a lot only thing i had a unexpected thing with was "!" 
+
+What caused the issue? (e.g., syntax error, logic error, incorrect function usage, etc.)
+the logic caused the issue i needed to ensure the score deduction and the FLAG check worked
+together properly in the do-while loop also needed to handle the case where score
+reaches 0, requiring a break statement to exit the loop early
+
+Include a screenshot of specific lines of code.
+the key section was the do while loop condition and the score check:
+Line with score deduction: score -= POINTS_PER_GUESS;
+line with score check: if (score <= 0) { break; }
+
+How did you fix the issue?
+I added a score check inside the loop with a break statement so that when the score
+reaches 0 the loop exits and the player receives a loss message the break statement
+was placed after displaying the current score so the player can see it hit 0
+
+Provide the corrected code or solution using a screenshot.
+the final working solution includes the score check inside the do-while loop and
+proper win/loss logic at the end of the wordgues game

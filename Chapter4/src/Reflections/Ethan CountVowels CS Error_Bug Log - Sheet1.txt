@@ -1,0 +1,32 @@
+Credit Name: Chapter 4
+Assignment Name: CountVowels
+
+Error Log Entry
+
+What error message did you encounter (if any)?
+FileNotFoundException could occur if the user enters an incorrect file name or path.
+During development, I initially forgot to include the full path to the text file.
+
+What unexpected behavior did your program exhibit?
+When testing with a file in a different directory, the program could not find it because
+I was only entering the file name without the path. The program needs the correct
+relative or absolute path to the file.
+
+What caused the issue? (e.g., syntax error, logic error, incorrect function usage, etc.)
+Logic error - the File object looks for the file relative to the project's working
+directory. If the file is not in that directory, a full path is needed.
+
+Include a screenshot of specific lines of code.
+Key lines:
+- textFile = new File(fileName);
+- in = new FileReader(textFile);
+- catch (FileNotFoundException e) handles this case
+
+How did you fix the issue?
+I ensured the text file was placed in the correct directory (the project root) and
+entered just the file name. Alternatively, the user can enter the full path to the file.
+The FileNotFoundException catch block displays a helpful message if the file is not found.
+
+Provide the corrected code or solution using a screenshot.
+The final solution properly handles file not found errors and displays the vowel count
+for valid files.

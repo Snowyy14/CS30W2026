@@ -1,0 +1,33 @@
+Credit Name: Chapter 4
+Assignment Name: StudentSemesterAverage
+
+Error Log Entry
+
+What error message did you encounter (if any)?
+NumberFormatException occurred when clicking Save with empty grade fields or
+non-numeric text in the grade fields.
+
+What unexpected behavior did your program exhibit?
+The program crashed when the user clicked Save to File without entering numbers
+in all four grade fields. Also, if the data file did not exist yet, clicking
+View File Contents would show an error.
+
+What caused the issue? (e.g., syntax error, logic error, incorrect function usage, etc.)
+Runtime error - Double.parseDouble() throws NumberFormatException when given
+an empty string or non-numeric text. FileNotFoundException is thrown when
+trying to read a file that does not exist yet.
+
+Include a screenshot of specific lines of code.
+Key lines:
+- double g1 = Double.parseDouble(grade1Field.getText());
+- catch (NumberFormatException e) for invalid input
+- catch (FileNotFoundException e) for missing file
+
+How did you fix the issue?
+I wrapped the grade parsing in a try-catch block for NumberFormatException
+and display an error dialog telling the user to enter valid numbers. For the
+file reading, I catch FileNotFoundException and display "No saved data found."
+in the text area instead of crashing.
+
+Provide the corrected code or solution using a screenshot.
+The final solution handles both exceptions gracefully with user-friendly messages.

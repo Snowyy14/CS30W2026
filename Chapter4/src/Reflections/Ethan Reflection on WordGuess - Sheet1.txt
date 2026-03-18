@@ -1,0 +1,56 @@
+Credit Name: Chapter 4
+Assignment Name: WordGuess
+
+The following questions can help you in thinking critically about your problem-solving processes:
+
+Understanding the Problem
+How did you approach understanding the challenge?
+I read the Chapter 6 Case Study specification which described a word guessing game where
+the player guesses letters of a secret word (BRAIN). I studied the algorithm, flowchart,
+and sample output to understand how the game should behave. I also understood the
+additional requirement to add a scoring system starting at 100 points with 10 points
+deducted per guess.
+
+Were there any parts of the problem you found confusing at first? If so, how did you resolve that confusion?
+I initially needed to understand how the dash replacement logic should work - specifically
+how to replace the correct dash position with the guessed letter. I resolved this by
+iterating through each character of the secret word and comparing it to the guess.
+
+Planning the Solution
+Did you create a plan or break the problem into smaller steps before coding?
+Yes, I broke the problem into steps: display dashes, get letter guesses in a loop,
+replace dashes with correct letters, handle the ! flag for word guessing, implement
+the scoring system, and display win/loss results.
+
+How did you decide on the tools, data structures, or algorithms to use?
+I used a do-while loop as recommended by the case study since the loop needs to
+execute at least once. I used String variables to track the word state and an int
+for score tracking.
+
+Implementation
+Did you write the code in small pieces or attempt the entire solution at once?
+I wrote the code in sections: first the game setup (constants, variables), then the
+dash display, then the guessing loop, then the win/loss logic, and finally the scoring
+system integration.
+
+How did you test your solution along the way to make sure it was working?
+I tested by running the game and trying different scenarios: guessing correct letters,
+guessing wrong letters, using ! to guess the whole word correctly and incorrectly,
+and letting the score reach 0.
+
+Overcoming Challenges
+What part of the problem was the most difficult for you?
+Integrating the scoring system with the existing game loop was the trickiest part.
+I needed to make sure the score was checked after each guess and that the loop would
+break when the score reached 0, ending the game as a loss.
+
+How did you handle moments when you felt stuck or unsure of what to do next?
+I referred back to the case study pseudocode and flowchart to guide my implementation.
+Breaking the problem down into smaller pieces helped me work through each part
+systematically.
+
+Learning
+Was there anything you learned that you think will help you with future challenges?
+I learned how to combine loop control with multiple exit conditions (letter guessed,
+word guessed, flag entered, score depleted). I also practiced String manipulation
+methods like charAt(), String.valueOf(), and equals().
