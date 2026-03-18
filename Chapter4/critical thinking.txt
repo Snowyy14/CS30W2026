@@ -1,0 +1,48 @@
+  i think loops are just like doing something over and over so u dont have to write the same code a bunch of times thats the purpose i think
+i think the difference is that a while loop checks the condition BEFORE it runs but a do while checks AFTER so the do while always runs at least once no matter what
+i think it was in review question 3 where u had to write the input validation loop thingy where it keeps asking until u type something right
+i think an infinite loop is when the loop just never stops it goes forever and ever
+two errors that cause it are like forgetting to update the variable that controls the loop and also writing the condition wrong so it never becomes false
+overflow is when a number gets so big it wraps around and goes negative or something weird like that
+i think the do while loop will execute 60 times because x starts at 0 and goes up by 2 each time until x is not less than 120 so it stops when x hits 120 which is 60 times
+i think if x starts at 120 or higher that would make it infinite because x + 3 would always be bigger than 120 so the condition x < 120 would never be true wait no it would never loop again hmm actually if x starts at like a number where adding 3 keeps it always less than 120 forever that cant happen with integers so i think if x is negative and like it overflows or if x stays below 120 forever but with integers adding 3 it will always eventually reach 120 so actually theres no initial value that makes it infinite unless overflow happens so like a very large negative number near the overflow boundary
+counters and accumulators are kinda similar but different i think a counter just counts by a set amount like 1 every time and an accumulator adds up different values each time
+counter uses: counting how many times a loop ran and counting how many students passed
+accumulator uses: adding up a total score and calculating a running total of sales
+i think it would be like
+for (int i = 3 i <= 10 i++) { sum = sum + i }
+i think u should consider like whether the loop needs to run at least once and also whether u know ahead of time how many times it should loop
+i think two debugging methods are using print statements to show variable values and using a debugger tool that steps through the code
+i think the print statement method would be best for random numbers because the debugger might change the timing or behavior but printing the values lets u see exactly what random numbers were generated without messing things up
+i think for String x = "my string."
+a) 10 because theres 10 characters including the space and period
+b) "my " because substring 0 to 3 gives first 3 characters
+c) "my string." its already lowercase so same thing
+d) "MY STRING."
+e) "my string." theres no spaces to trim so same
+i think for the string comparisons
+a) false because one has capital L and the other doesnt
+b) true because ignoring case theyre the same
+c) a negative number because l comes before t alphabetically so lots comes before two
+d) 0 because ignoring case theyre equal
+e) a negative number because l comes before t
+f) 5 because "or" first appears at index 5 in "lots of words."
+g) 9 because the last o is in "words" at index 9
+h) true because z starts with "Tw"
+i) false because x ends with "ds." not "ds" wait actually "lots of words." ends with "s." so false
+i think for counting words u go through each character and every time u see a space u add 1 to a word counter then add 1 at the end for the last word
+for counting letters u go through each character and if its a letter and not a space or punctuation u add 1 to a letter counter
+i think for true false
+a) false because while checks condition first before doing anything
+b) true
+c) false thats what a sentinel value does not an accumulator
+d) false sentinel values can be any value that wont appear in normal input like -999 or whatever
+e) false the variable only exists inside the for loop scope
+f) false strings are objects not primitive types
+g) false the first character is at index 0
+h) false u use methods like equals or compareTo not operators like >
+i) true thats the indexOf method
+
+
+
+              
