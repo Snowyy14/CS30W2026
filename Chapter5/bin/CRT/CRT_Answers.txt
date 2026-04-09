@@ -1,0 +1,26 @@
+Answers for Critical Thinking Questions - Chapter 5
+
+1. Explain the difference between a has-a and is-a relationship among classes.
+"is-a" is an inheritance relationship, like how a Car is a Vehicle. "has-a" means a class contains an object of another class, like how an Account has a Customer inside it.
+
+2. If a base class has a public method go() and a derived class has a public method stop(), which methods will be available to an object of the derived class?
+An object of the derived class will have both the go() method and the stop() method available.
+
+3. Compare and contrast implementing an abstract method to overriding a method.
+Implementing an abstract method is required because the abstract method doesn't have any code inside it yet. Overriding a method is usually optional where you just rewrite or change the behavior of a method that is already inherited and working.
+
+4. Compare and contrast an abstract class to an interface.
+An abstract class can have member variables and regular methods with code in them, but you can only inherit from one abstract class. An interface is pretty much just a list of empty methods you have to write, but you can implement as many interfaces as you want on a single class.
+
+6. (Questions from image based on the provided Code)
+a) What type of method is doThat() in Wo?
+It's an abstract method.
+
+b) What is Wo?
+It's an interface.
+
+c) Why is doThat() implemented in Roo?
+Because the Roo class implements the Wo interface, so it forces Roo to actually write the code for the doThat() method.
+
+d) List the methods available to a Roo object.
+A Roo object has doThis(), doNow(), and doThat().

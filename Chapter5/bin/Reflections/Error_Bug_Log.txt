@@ -1,0 +1,31 @@
+Credit Name: Chapter 5
+Assignment Name: Error and Bug Log
+
+Error Log Entry 1
+
+What error message did you encounter (if any)?
+cannot reduce visibility of inherited method from account
+
+What unexpected behavior did your program exhibit?
+when i was doing the withdrawal method in the personal account it just kept giving me a red line and wouldnt compile at all
+
+What caused the issue? 
+i forgot to type public at the start of the void withdrawal method so it defaulted and the original one was public so it got mad
+
+How did you fix the issue?
+added public back into it
+
+
+Error Log Entry 2
+
+What error message did you encounter (if any)?
+nullpointerexception but when i ran the code
+
+What unexpected behavior did your program exhibit?
+i called the tostring on the account and it just crashed my whole program 
+
+What caused the issue? 
+in the new account constructor i made i never actually set the cust variable to anything so it was just null the whole time
+
+How did you fix the issue?
+i put cust = new Customer(fname lname etc) inside the constructor so it actually made the object
