@@ -1,50 +1,34 @@
 Credit Name: Chapter 4
 Assignment Name: CountVowels
 
-The following questions can help you in thinking critically about your problem-solving processes:
-
 Understanding the Problem
 How did you approach understanding the challenge?
-I understood that I needed to read a text file and count how many vowels (a, e, i, o, u)
-appear in it. The program prompts the user for the file name, reads it line by line,
-and checks each character.
+Pretty simple concept - read a file and count the vowels. The main thing I had to figure out was how to actually open and read a file in Java since we haven't done a ton of file stuff before. The template helped a lot with showing me what classes to use.
 
 Were there any parts of the problem you found confusing at first? If so, how did you resolve that confusion?
-I had to think about how to handle uppercase vs lowercase letters. I resolved this by
-converting each line to lowercase before checking for vowels, so both "A" and "a" are
-counted the same way.
+I was confused about why we need three different objects just to read a file (File, FileReader, BufferedReader). Seemed like overkill at first. But I get it now - File is just the path, FileReader opens it, and BufferedReader lets you read line by line which is way easier than character by character.
 
 Planning the Solution
 Did you create a plan or break the problem into smaller steps before coding?
-Yes, I planned it in steps: prompt for file name, open the file with FileReader and
-BufferedReader, read each line, convert to lowercase, iterate through each character,
-check if it's a vowel, and keep a running count.
+Yeah, I thought about it in three steps: get the file name from the user, read through the file line by line, and check each character to see if its a vowel. Pretty straightforward once I broke it down.
 
 How did you decide on the tools, data structures, or algorithms to use?
-I used File, FileReader, and BufferedReader for file I/O as shown in the template.
-A while loop reads lines until null, and a for loop iterates through each character.
-String.valueOf() converts characters to strings for comparison.
+The template told me to use File, FileReader, and BufferedReader. For checking vowels I just used a bunch of if statements with equals(). I converted everything to lowercase first so I wouldn't have to check both uppercase and lowercase versions.
 
 Implementation
 Did you write the code in small pieces or attempt the entire solution at once?
-I built it section by section: first the file opening, then the line reading loop,
-then the character checking logic, and finally the exception handling.
+I wrote the file reading part first without any vowel checking - just printed each line to make sure the file was being read right. Then I added the vowel checking logic inside the loop.
 
 How did you test your solution along the way to make sure it was working?
-I created a test text file and ran the program to verify the vowel count matched
-what I expected from manually counting.
+I made a test file with some text I could manually count the vowels in. Like I typed "hello world" and counted 3 vowels by hand then ran my program to make sure it also got 3.
 
 Overcoming Challenges
 What part of the problem was the most difficult for you?
-Setting up the file I/O with the try-catch blocks was the most involved part.
-I needed to handle both FileNotFoundException and IOException properly.
+Getting the try-catch blocks right was annoying. I kept getting compiler errors about unhandled exceptions until I added catches for both FileNotFoundException and IOException.
 
 How did you handle moments when you felt stuck or unsure of what to do next?
-I referred to the template comments which guided me through each step of the
-file reading process.
+I looked at the template comments - they basically walked me through it step by step which was really helpful.
 
 Learning
 Was there anything you learned that you think will help you with future challenges?
-I learned how to read files line by line using BufferedReader and how to properly
-handle file I/O exceptions in Java. The pattern of reading until null is useful
-for any file processing task.
+The whole File -> FileReader -> BufferedReader pattern is something I'll definitely reuse. Once you learn it once it's pretty much the same every time. Also toLowerCase() is super handy for any kind of character comparison.

@@ -1,56 +1,36 @@
 Credit Name: Chapter 4
 Assignment Name: StudentSemesterAverage
 
-The following questions can help you in thinking critically about your problem-solving processes:
-
 Understanding the Problem
 How did you approach understanding the challenge?
-I studied the reference screenshots to understand the GUI layout and functionality.
-The application needs input fields for student name, grade level, semester number,
-and four grades. It calculates an average, saves data to a file, and can display
-all saved records.
+I looked at the screenshots to understand what the GUI should look like - basically a form with fields for student info and grades, an area to show saved records, and buttons to save and view data. The big thing was that it needed to use two separate classes and object serialization which I hadn't really done before.
 
 Were there any parts of the problem you found confusing at first? If so, how did you resolve that confusion?
-I needed to figure out how to structure the layout with labels on the left and text
-fields on the right, plus a text area below and buttons at the bottom. I resolved
-this by using BorderLayout for the frame with a GridLayout panel at the top for
-the input fields.
+Object serialization was new to me. I didn't really get why you'd want to save an object to a file instead of just saving text. But it makes sense now - when you serialize, you save the whole object with all its data and you can load it back as an actual object instead of having to parse text. I figured it out by looking up how ObjectOutputStream and ObjectInputStream work.
 
 Planning the Solution
 Did you create a plan or break the problem into smaller steps before coding?
-Yes, I broke it into: 1) Build the input form with labels and text fields,
-2) Add the text area for file display, 3) Add the Save and View buttons,
-4) Implement the save logic with file writing, 5) Implement the view logic
-with file reading, 6) Add average calculation.
+I planned it as two main parts: first the StudentRecord class that holds all the data and implements Serializable, then the GUI class that handles the interface and file operations. Having two classes made the code way more organized than putting everything in one giant file.
 
 How did you decide on the tools, data structures, or algorithms to use?
-I used JFrame, JPanel, JLabel, JTextField, JTextArea, and JButton from Swing.
-GridLayout was used for the form area. FileWriter with append mode for saving,
-and BufferedReader for reading the file.
+I used Swing for the GUI since thats what we learned in class. For saving I used both approaches - FileWriter/BufferedWriter for the text file and ObjectOutputStream for serialization. I used an ArrayList to hold multiple StudentRecord objects since you can serialize a whole list at once which is nice.
 
 Implementation
 Did you write the code in small pieces or attempt the entire solution at once?
-I built it in sections: first the GUI layout, then the Save button functionality
-with file writing, then the View button with file reading, and finally the
-average calculation and display.
+Started with the StudentRecord class - just the constructor, fields, and toString method. Then I built the GUI layout. Then the save button with text file writing. Then I added the serialization on top of that. Did the view button last.
 
 How did you test your solution along the way to make sure it was working?
-I tested by entering sample student data, clicking Save to File, verifying the
-confirmation dialog, and then clicking View File Contents to see if the data
-appeared correctly in the text area.
+I entered a couple test students and saved them, then clicked View to make sure they showed up. I also restarted the program and clicked View again to make sure the data was actually saved to the file and not just in memory.
 
 Overcoming Challenges
 What part of the problem was the most difficult for you?
-Getting the layout to match the reference screenshots was the most challenging
-part. I needed the form fields aligned properly and the text area to fill the
-remaining space.
+The serialization part was definitely the trickiest. I had to figure out how to load existing records from the .ser file before adding a new one, otherwise it would just overwrite the old data. The suppressWarnings thing for the unchecked cast was confusing too.
 
 How did you handle moments when you felt stuck or unsure of what to do next?
-I referred to the SemesterAvg example from the textbook which showed how to use
-JTextField with ActionListener, parse doubles, and structure a GUI application.
+I tested each feature separately. When the serialization wasn't working right I added some println statements to see what was being loaded and saved. That helped me find where things were going wrong.
 
 Learning
 Was there anything you learned that you think will help you with future challenges?
-I learned how to combine file I/O with a GUI application. Using FileWriter in
-append mode to save multiple records and BufferedReader to read them back was
-a useful pattern. I also learned how to use JOptionPane for dialog messages.
+A lot honestly. Object serialization is really powerful - instead of writing your own file format and parsing code, you can just dump objects to a file and read them back. Using two classes was also a good lesson in code organization. The StudentRecord class doesn't know anything about the GUI which means I could reuse it in a totally different program if I wanted to.
+
+I also learned that having a class implement Serializable is super easy - you just add "implements Serializable" and Java handles the rest. GridLayout is really handy for making forms too since it lines everything up automatically.

@@ -1,56 +1,34 @@
 Credit Name: Chapter 4
 Assignment Name: WordGuess
 
-The following questions can help you in thinking critically about your problem-solving processes:
-
 Understanding the Problem
 How did you approach understanding the challenge?
-I read the Chapter 6 Case Study specification which described a word guessing game where
-the player guesses letters of a secret word (BRAIN). I studied the algorithm, flowchart,
-and sample output to understand how the game should behave. I also understood the
-additional requirement to add a scoring system starting at 100 points with 10 points
-deducted per guess.
+I read through the case study a couple times to get the idea - basically you have a word hidden behind dashes and the player has to guess letters to reveal it. The tricky part was that the word had to come from a file instead of just being typed into the code. I had to figure out the file reading part, using a Random object to pick which word to use.
 
 Were there any parts of the problem you found confusing at first? If so, how did you resolve that confusion?
-I initially needed to understand how the dash replacement logic should work - specifically
-how to replace the correct dash position with the guessed letter. I resolved this by
-iterating through each character of the secret word and comparing it to the guess.
+Yeah the file reading part confused me at first. I wasn't sure how to read a specific line from the file since BufferedReader just reads line by line. I ended up reading the first line to get how many words there are, then picking a random number and looping through that many lines to get to the right word.
 
 Planning the Solution
 Did you create a plan or break the problem into smaller steps before coding?
-Yes, I broke the problem into steps: display dashes, get letter guesses in a loop,
-replace dashes with correct letters, handle the ! flag for word guessing, implement
-the scoring system, and display win/loss results.
+I broke it into a few parts: first get the word from the file, then show the dashes, then make the guessing loop work, then add the scoring system. It was easier to think about each part separately instead of trying to code everything at once.
 
 How did you decide on the tools, data structures, or algorithms to use?
-I used a do-while loop as recommended by the case study since the loop needs to
-execute at least once. I used String variables to track the word state and an int
-for score tracking.
+The template basically told me to use File, FileReader, BufferedReader, and Random. I used a do-while loop because the player always needs to guess at least once. For the scoring I just used an int variable that goes down by 10 each time.
 
 Implementation
 Did you write the code in small pieces or attempt the entire solution at once?
-I wrote the code in sections: first the game setup (constants, variables), then the
-dash display, then the guessing loop, then the win/loss logic, and finally the scoring
-system integration.
+I did it in pieces. I got the file reading working first and printed out the word to make sure it was actually reading correctly. Then I added the dashes and the guessing loop. The scoring was the last thing I added since it was pretty straightforward.
 
 How did you test your solution along the way to make sure it was working?
-I tested by running the game and trying different scenarios: guessing correct letters,
-guessing wrong letters, using ! to guess the whole word correctly and incorrectly,
-and letting the score reach 0.
+I ran the game a bunch of times. I tried guessing all the letters correctly, guessing wrong letters to see what happens, using ! to guess the whole word right and wrong, and also just entering wrong letters until my score hit 0 to make sure that worked too.
 
 Overcoming Challenges
 What part of the problem was the most difficult for you?
-Integrating the scoring system with the existing game loop was the trickiest part.
-I needed to make sure the score was checked after each guess and that the loop would
-break when the score reached 0, ending the game as a loss.
+Honestly the hardest part was getting the file path right. When I ran it in Eclipse, it kept saying it couldn't find words.txt because it was looking in the wrong directory. I had to mess around with where to put the file until it worked. The actual game logic wasn't too bad once I understood the do-while loop.
 
 How did you handle moments when you felt stuck or unsure of what to do next?
-I referred back to the case study pseudocode and flowchart to guide my implementation.
-Breaking the problem down into smaller pieces helped me work through each part
-systematically.
+When I got stuck on the file reading I went back to the template and looked at the comments - they were pretty helpful as a guide. I also looked at the CountVowels program since that also reads from a file and I could see how the BufferedReader pattern works.
 
 Learning
 Was there anything you learned that you think will help you with future challenges?
-I learned how to combine loop control with multiple exit conditions (letter guessed,
-word guessed, flag entered, score depleted). I also practiced String manipulation
-methods like charAt(), String.valueOf(), and equals().
+I learned how to read from a file and use the data in my program, which is way more useful than hardcoding stuff. I also learned that Random.nextInt() doesn't include the upper bound so you have to add 1. The do-while loop was cool too - I'll probably use that pattern anytime I need the user to do something at least once.

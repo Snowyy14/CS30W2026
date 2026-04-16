@@ -1,33 +1,43 @@
 Credit Name: Chapter 4
 Assignment Name: StudentSemesterAverage
 
-Error Log Entry
+Error Log
 
-What error message did you encounter (if any)?
-NumberFormatException occurred when clicking Save with empty grade fields or
-non-numeric text in the grade fields.
+Error 1:
+What error message did you encounter?
+NumberFormatException: For input string: ""
 
 What unexpected behavior did your program exhibit?
-The program crashed when the user clicked Save to File without entering numbers
-in all four grade fields. Also, if the data file did not exist yet, clicking
-View File Contents would show an error.
+Clicking "Save to File" with empty grade fields caused the program to throw an exception.
 
-What caused the issue? (e.g., syntax error, logic error, incorrect function usage, etc.)
-Runtime error - Double.parseDouble() throws NumberFormatException when given
-an empty string or non-numeric text. FileNotFoundException is thrown when
-trying to read a file that does not exist yet.
-
-Include a screenshot of specific lines of code.
-Key lines:
-- double g1 = Double.parseDouble(grade1Field.getText());
-- catch (NumberFormatException e) for invalid input
-- catch (FileNotFoundException e) for missing file
+What caused the issue?
+Double.parseDouble() can't handle an empty string. I was clicking save before filling in all the grade fields.
 
 How did you fix the issue?
-I wrapped the grade parsing in a try-catch block for NumberFormatException
-and display an error dialog telling the user to enter valid numbers. For the
-file reading, I catch FileNotFoundException and display "No saved data found."
-in the text area instead of crashing.
+Wrapped the whole save logic in a try-catch for NumberFormatException. Now it shows a dialog box saying "Please enter valid numbers for all grades" instead of crashing.
 
-Provide the corrected code or solution using a screenshot.
-The final solution handles both exceptions gracefully with user-friendly messages.
+Error 2:
+What error message did you encounter?
+java.io.StreamCorruptedException
+
+What unexpected behavior did your program exhibit?
+When I tried to load serialized data after saving multiple times, it would sometimes throw this error. The .ser file was getting corrupted.
+
+What caused the issue?
+I was originally opening the file in append mode for serialization which doesn't work - you can't just append serialized objects to a file. Each ObjectOutputStream writes a header that messes up the file if you try to append.
+
+How did you fix the issue?
+Changed my approach to load ALL existing records into an ArrayList first, add the new record to the list, then write the entire list back to the file. This way the file gets properly rewritten each time.
+
+Error 3:
+What error message did you encounter?
+No crash but the data wasn't showing up.
+
+What unexpected behavior did your program exhibit?
+After saving a student and clicking "View File Contents", the text area was empty even though the save confirmed successfully.
+
+What caused the issue?
+The text file was being saved in a different directory than where the program was looking when reading. Eclipse's working directory threw me off.
+
+How did you fix the issue?
+Made sure both the save and load operations use the same file path. Also tested by checking if the file actually existed in the project folder after saving.

@@ -1,1 +1,2 @@
 Name: ethan, Grade Level: 12, Semester: 2, Grades: 50.0, 90.0, 40.0, 50.0, Average: 57.5%
+Name: ethan, Grade Level: 12, Semester: 2, Grades: 70.0, 70.0, 80.0, 59.0, Average: 69.8%

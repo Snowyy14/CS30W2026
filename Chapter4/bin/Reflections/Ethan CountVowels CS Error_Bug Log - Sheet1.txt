@@ -1,32 +1,30 @@
 Credit Name: Chapter 4
 Assignment Name: CountVowels
 
-Error Log Entry
+Error Log
 
-What error message did you encounter (if any)?
-FileNotFoundException could occur if the user enters an incorrect file name or path.
-During development, I initially forgot to include the full path to the text file.
+Error 1:
+What error message did you encounter?
+FileNotFoundException when entering a file name that didn't exist.
 
 What unexpected behavior did your program exhibit?
-When testing with a file in a different directory, the program could not find it because
-I was only entering the file name without the path. The program needs the correct
-relative or absolute path to the file.
+The program would crash when I typed the wrong file name or forgot to include the file extension (.txt).
 
-What caused the issue? (e.g., syntax error, logic error, incorrect function usage, etc.)
-Logic error - the File object looks for the file relative to the project's working
-directory. If the file is not in that directory, a full path is needed.
-
-Include a screenshot of specific lines of code.
-Key lines:
-- textFile = new File(fileName);
-- in = new FileReader(textFile);
-- catch (FileNotFoundException e) handles this case
+What caused the issue?
+User input error - I typed "testfile" instead of "testfile.txt". The File object needs the exact file name with extension.
 
 How did you fix the issue?
-I ensured the text file was placed in the correct directory (the project root) and
-entered just the file name. Alternatively, the user can enter the full path to the file.
-The FileNotFoundException catch block displays a helpful message if the file is not found.
+Added a FileNotFoundException catch block that tells the user the file wasn't found. This way the program doesn't just crash - it gives a helpful message.
 
-Provide the corrected code or solution using a screenshot.
-The final solution properly handles file not found errors and displays the vowel count
-for valid files.
+Error 2:
+What error message did you encounter?
+No error, but the vowel count was wrong.
+
+What unexpected behavior did your program exhibit?
+The program was counting fewer vowels than expected. I had a word like "APPLE" and it wasn't counting the uppercase A.
+
+What caused the issue?
+Logic error - I forgot to convert the line to lowercase before checking for vowels. Since I was only checking for lowercase a, e, i, o, u, any uppercase vowels got missed.
+
+How did you fix the issue?
+Added lowercaseText = lineInFile.toLowerCase() before the character loop so everything gets converted to lowercase first. After that the count was correct.
