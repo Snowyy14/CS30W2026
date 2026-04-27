@@ -1,0 +1,161 @@
+Chapter 8 - Critical Thinking Answers
+Object-Oriented Techniques
+Author: Ethan
+Date: April 16, 2026
+
+================================================================================
+Question #1: Explain the difference between a has-a and is-a relationship
+among classes.
+================================================================================
+
+An "is-a" relationship is when one class inherits from another using the extends
+keyword. It means the subclass IS A type of the parent class. For example in my
+code, a Faculty IS A UEmployee - it inherits name and salary from UEmployee and
+adds its own department field on top. A Car IS A Vehicle, a PersonalAcct IS An
+Account. The child class gets everything from the parent automatically.
+
+A "has-a" relationship is composition or aggregation - when a class contains an
+instance of another class as one of its fields. For example, my Account class HAS
+A Customer object stored inside it. The Account doesn't inherit from Customer,
+it just uses a Customer to store the name and address info. Another example is
+my University class - it HAS a list of UEmployee objects. The University doesn't
+extend UEmployee, it just manages a collection of them.
+
+The key difference is that "is-a" creates an inheritance chain where the child
+can do everything the parent can plus more, while "has-a" just means one class
+uses another class as a building block. You use "is-a" when the child really is
+a specialized version of the parent, and "has-a" when one class just needs to
+use another class's functionality.
+
+================================================================================
+Question #2: If a base class has a public method go() and a derived class has
+a public method stop(), which methods will be available to an object of the
+derived class?
+================================================================================
+
+An object of the derived class would have access to BOTH go() and stop(). The
+derived class inherits go() from the base class, so it can use it even though
+it didn't write it. And stop() is defined right there in the derived class
+itself. So the derived class object gets the best of both worlds.
+
+However, if you created an object of the BASE class, it would only have go()
+and NOT stop(). Inheritance only flows downward - parent to child. The base
+class doesn't know anything about methods its children define.
+
+I saw this in my own code - when I create a Car object, it can call drive()
+(which it overrides from Vehicle), accelerate() and brake() (inherited from
+Vehicle), AND packTrunk() (defined only in Car). But a Truck object can't
+call packTrunk() because that's Car-specific.
+
+================================================================================
+Question #3: Compare and contrast implementing an abstract method to
+overriding a method.
+================================================================================
+
+Implementing an abstract method means you MUST provide the code for a method
+that was declared but left empty in an abstract parent class. The parent said
+"hey, all my children need to have this method, but I don't know what it should
+do specifically." For example, my Vehicle class declares abstract void drive()
+but doesn't write any code for it. Car, Truck, and Minivan are FORCED to
+implement drive() with their own specific behavior. If they don't, the compiler
+throws an error and refuses to compile.
+
+Overriding a method is when a subclass provides its own version of a method that
+already has working code in the parent class. The parent's version works fine,
+but the child wants to do something different or add extra behavior. For example,
+my PersonalAcct overrides the withdrawal() method from Account - the parent
+version already works for basic withdrawals, but PersonalAcct needs to add the
+penalty check on top of it. It even calls super.withdrawal() to reuse the
+parent's logic.
+
+The big difference: implementing an abstract method is MANDATORY (the parent
+forces you), while overriding is OPTIONAL (you choose to replace or extend
+the parent's behavior). Also, abstract methods have no body in the parent,
+while overridden methods do have a working implementation you're choosing
+to replace.
+
+================================================================================
+Question #4: Compare and contrast an abstract class to an interface.
+================================================================================
+
+An abstract class can have a mix of regular methods (with full code) and abstract
+methods (just the signature, no code). It can also have instance variables with
+any access modifier. You can only extend ONE abstract class though - Java doesn't
+allow multiple inheritance. My Vehicle class is abstract - it has working methods
+like accelerate() and brake(), plus the abstract drive() method that subclasses
+must implement. It also has instance variables like make, model, year, speed.
+
+An interface is like a contract - it traditionally only declares method signatures
+that implementing classes MUST provide. Interfaces can't have instance variables
+(only constants). But the big advantage is that a class can implement MULTIPLE
+interfaces. My Rectangle class implements both Comparable AND ComparableArea
+at the same time, which you can't do with abstract classes.
+
+The key differences:
+- Abstract class: can have regular methods + abstract methods + variables,
+  but you can only extend one.
+- Interface: originally just method signatures (though newer Java versions
+  allow default methods), but you can implement as many as you want.
+- Use abstract class when subclasses share common code and state.
+- Use interface when you want to define a capability that unrelated classes
+  can share (like being Comparable).
+
+================================================================================
+Question #6:
+================================================================================
+
+a) What type of method is doThat() in Wo?
+   doThat() is an abstract method. Since Wo is an interface, all methods
+   declared in it are implicitly abstract - they have no body, just the
+   method signature. Any class that implements Wo is forced to provide
+   the actual code for doThat().
+
+b) What is Wo?
+   Wo is an interface. It defines a contract that any implementing class
+   must follow. It's not a regular class or abstract class - it's a blueprint
+   that says "if you want to be a Wo, you must implement these methods."
+
+c) Why is doThat() implemented in Roo?
+   Because Roo implements the Wo interface (using the "implements" keyword).
+   When a class says it implements an interface, it's making a promise to
+   provide working code for every method the interface declares. Since Wo
+   declares doThat(), Roo HAS to write the actual code for it. If Roo
+   didn't implement doThat(), the compiler would throw an error because
+   Roo would be breaking its promise.
+
+d) List the methods available to a Roo object.
+   A Roo object would have access to:
+   - doThis() - inherited from the parent class (likely Yoo or whatever
+     class Roo extends)
+   - doNow() - also inherited from the parent class
+   - doThat() - implemented from the Wo interface
+   Plus any methods from Object class (toString(), equals(), etc.) since
+   every Java class ultimately extends Object.
+
+================================================================================
+Question #7: Explain polymorphism and provide an example from your code.
+================================================================================
+
+Polymorphism means "many forms" - it's when a single variable or method call
+can behave differently depending on what type of object it's actually pointing
+to at runtime. In Java, this happens when you use a parent class reference to
+hold a child class object.
+
+The best example from my code is in the CarLot class. The inventory list is
+declared as ArrayList<Vehicle>, but it actually holds Car, Truck, and Minivan
+objects. When I call toString() on each vehicle in the list, Java automatically
+calls the correct version - Car's toString() for car objects, Truck's toString()
+for truck objects, etc. I never have to check what type each vehicle is, Java
+figures it out.
+
+Another example is the abstract drive() method. In TestVehicle, I could
+theoretically store all vehicles in a Vehicle array and call drive() on each
+one. Even though they're all referenced as "Vehicle", the Car would print
+"cruising down the road", the Truck would print "hauling a heavy load", and
+the Minivan would print "taking the family to soccer practice". Same method
+call, different behavior - that's polymorphism.
+
+My University class does the same thing - it stores Faculty and Staff in an
+ArrayList<UEmployee>, and when it calls toString() on each one, the right
+version runs automatically. This is way cleaner than using if-else chains
+to check what type each employee is.

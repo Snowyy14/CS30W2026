@@ -1,0 +1,288 @@
+Chapter 8 - Reflections
+Object-Oriented Techniques
+Author: Ethan
+Date: April 16, 2026
+
+================================================================================
+REFLECTION - Skill Builder: Puck (Circle -> Disk -> Puck)
+================================================================================
+
+1. Understanding the Problem
+   The goal was to build a three-level inheritance hierarchy: Circle at the top,
+   then Disk extending Circle, then Puck extending Disk. The Puck needed weight-based
+   classification into Standard (5-5.5 oz) or Youth (4-4.5 oz) divisions, and it
+   had to implement the Comparable interface so pucks could be compared by weight.
+   All pucks share the same physical dimensions - 3 inch diameter, 1 inch thick.
+
+2. Planning the Solution
+   I started from the top down - Circle first since everything builds on it, then
+   Disk which adds thickness, then Puck which adds weight and division logic. For
+   the Comparable part, I used Double.compare() for the weight comparison since it
+   handles edge cases cleanly. I made the dimensions constants in Puck since all
+   official pucks are the same size.
+
+3. Implementation
+   Circle was straightforward with just a radius and area calculation. Disk added
+   thickness and a volume method (area * thickness). Puck was the interesting one -
+   the constructor auto-sets the standard and youth booleans based on the weight
+   range, and the getDivision() method returns a string based on which flag is true.
+   The equals method compares weights, while compareTo returns the standard -1/0/1.
+
+4. Overcoming Challenges
+   I initially forgot that the diameter is 3 inches, not the radius. So my first
+   version was creating pucks with radius 3 which made them way too big. Had to
+   divide by 2 in the constructor call to super. Also had a moment where I was
+   confused about whether to put Comparable on Disk or Puck - it made more sense
+   on Puck since that's where weight lives.
+
+5. Learning
+   This exercise really showed me how inheritance builds up naturally. Each class
+   only adds what's new and relevant to it, and the parent handles the rest. The
+   Puck constructor barely does anything because Circle and Disk handle radius
+   and thickness. Also learned that Comparable is an interface, not a class, so
+   you implement it rather than extend it.
+
+6. Application
+   This pattern applies to any real-world classification hierarchy. Like how in a
+   sports equipment store, you'd have a general Product class, then SportEquipment,
+   then specific items like HockeyPuck. Each level adds more specific details.
+
+7. Connections
+   The Comparable interface connects to sorting algorithms - once a class implements
+   Comparable, you can use Collections.sort() or Arrays.sort() on it automatically.
+   This is way better than writing custom sorting logic every time.
+
+8. Improvement
+   I could add validation to the Puck constructor so it rejects negative weights.
+   Could also add a method to check if a puck is regulation (either standard or
+   youth) vs non-regulation. Maybe even implement Serializable to save puck data.
+
+9. Overall Reflection
+   Building the three-level hierarchy was a great exercise in seeing how inheritance
+   chains work in practice. Each class is small and focused but together they create
+   a powerful structure. The Comparable interface was a nice addition because it
+   showed how interfaces layer on top of inheritance independently.
+
+================================================================================
+REFLECTION - Skill Builder: Rectangle (Parts 1-5)
+================================================================================
+
+1. Understanding the Problem
+   Had to build a Rectangle class that evolved across 5 parts - starting with basic
+   constructors and area/perimeter, adding a static method, then equals/toString
+   overrides, then Comparable interface, and finally a custom ComparableArea
+   interface. The idea was to combine all 5 into one class that demonstrates
+   everything together.
+
+2. Planning the Solution
+   Rather than building 5 separate versions, I designed one Rectangle class that
+   included everything from the start. The two interfaces (Comparable and
+   ComparableArea) needed to work differently - Comparable checks dimensions
+   while ComparableArea checks area values. This distinction is important because
+   a 3x5 and 5x3 rectangle have the same area but aren't "equal" by dimensions.
+
+3. Implementation
+   The overloaded constructors were easy - no-arg defaults to 1x1, parameterized
+   takes length and width. displayAreaFormula() is static so you can call it on
+   the class directly. equals() checks if both dimensions match exactly.
+   compareTo() from Comparable checks width first then length for consistent
+   ordering. compareToArea() from ComparableArea only cares about the area value.
+
+4. Overcoming Challenges
+   The trickiest part was understanding the difference between compareTo and
+   compareToArea. At first I made them do the same thing, but then realized
+   compareTo should compare dimensions while compareToArea should compare the
+   actual area values. A 3x5 and 5x3 rectangle have different compareTo results
+   but the same compareToArea result (both are 15 sq units).
+
+5. Learning
+   Learned that a single class can implement multiple interfaces, which is something
+   you can't do with abstract class inheritance. Also learned about floating point
+   comparison issues - you can't just use == for doubles because of precision errors.
+   Using Math.round() or an epsilon value fixes that.
+
+6. Application
+   The ComparableArea interface could be used by any 2D shape class - circles,
+   triangles, etc. That's the power of interfaces - they define a capability that
+   any class can adopt regardless of its inheritance chain.
+
+7. Connections
+   This connects to the concept of interface segregation - rather than putting
+   everything in one big interface, having separate Comparable and ComparableArea
+   interfaces lets classes pick and choose what behavior they need.
+
+8. Improvement
+   Could add more validation (negative dimensions), implement more interfaces
+   like Serializable, or add a method to check if the rectangle is a square.
+   Could also implement ComparableArea for the Circle class and compare shapes
+   across different types.
+
+9. Overall Reflection
+   Combining all 5 parts into one class was actually cleaner than I expected.
+   Each part just added a new capability without breaking anything that came
+   before. The two interfaces working alongside each other showed me how
+   flexible Java's interface system is compared to single inheritance.
+
+================================================================================
+REFLECTION - Mastery: UEmployee / Faculty / Staff / University
+================================================================================
+
+1. Understanding the Problem
+   Build a university employee system with UEmployee as the base, Faculty and Staff
+   as subclasses, and University as an aggregation class that manages collections
+   of employees. Had to demonstrate both is-a (inheritance) and has-a (aggregation)
+   relationships.
+
+2. Planning the Solution
+   Started with UEmployee since it's the foundation - just name and salary. Faculty
+   adds department, Staff adds job title. The University class was the interesting
+   design challenge - needed to use an ArrayList of UEmployee references so it could
+   hold both Faculty and Staff through polymorphism.
+
+3. Implementation
+   The inheritance part was clean - super() handles the common fields. The University
+   class uses ArrayList<UEmployee> which lets it store and manage both types without
+   caring which specific type each employee is. The listFaculty() and listStaff()
+   methods use instanceof to filter when needed.
+
+4. Overcoming Challenges
+   I struggled with the equals method at first. For UEmployee I just compared names,
+   but for Faculty I needed to compare both name AND department. Using super.equals()
+   for the name part and then checking department separately was cleaner than
+   rewriting the whole comparison.
+
+5. Learning
+   Polymorphism is incredibly useful in the University class. When listAllEmployees()
+   calls toString() on each UEmployee reference, Java automatically uses the correct
+   Faculty or Staff version. I don't need to check types or use casting.
+
+6. Application
+   This pattern is exactly how real HR systems work. You have an Employee base, 
+   then specific types like FullTime, PartTime, Contractor. The company aggregate
+   class manages them all through the base reference.
+
+7. Connections
+   The University class is similar to the CarLot and MyBank classes - they all
+   follow the same aggregation pattern. This made me realize that design patterns
+   repeat across different domains.
+
+8. Improvement
+   Could add employee ID generation, department objects (instead of just strings),
+   a method to calculate average salary, or searching by salary range. Could also
+   use an interface for common listing behavior across University, CarLot, MyBank.
+
+9. Overall Reflection
+   This exercise really clicked for me because I could see both relationships
+   working together. Faculty IS-A UEmployee (inheritance) and University HAS
+   UEmployees (aggregation). Understanding when to use each one is probably
+   the most important OOP concept.
+
+================================================================================
+REFLECTION - Mastery: Vehicle / Car / Truck / Minivan / CarLot
+================================================================================
+
+1. Understanding the Problem
+   Create an abstract Vehicle class with the new fuel economy and capacity fields,
+   then concrete subclasses (Car, Truck, Minivan) with unique attributes, and a
+   CarLot aggregation class. The abstract class means you can't create a plain
+   Vehicle - it has to be a specific type.
+
+2. Planning the Solution
+   Vehicle handles all the common stuff - make, model, year, speed, fuel economy,
+   seating, cargo volume. Each subclass adds one unique thing (trunk space, carrying
+   capacity, sliding doors) and implements the abstract drive() method differently.
+   CarLot follows the same aggregation pattern as University.
+
+3. Implementation
+   Adding the four new fields (fuelEconomyCity, fuelEconomyHwy, seatingCapacity,
+   cargoVolume) to Vehicle meant updating every subclass constructor too since they
+   all call super(). This was a bit tedious but showed me how changes to a parent
+   class cascade down through the hierarchy. CarLot includes a getMostFuelEfficient()
+   method which loops through all vehicles comparing highway MPG.
+
+4. Overcoming Challenges
+   The biggest headache was updating all the constructor calls when I added the new
+   fields. Every place that creates a Car, Truck, or Minivan needed four extra
+   parameters. Also initially forgot to make Vehicle abstract and tried to
+   instantiate it in the test class which obviously didn't work.
+
+5. Learning
+   Abstract classes are great for enforcing a common structure while preventing
+   direct instantiation of incomplete types. A "Vehicle" by itself doesn't make
+   sense - it needs to be a specific kind of vehicle.
+
+6. Application
+   This maps directly to any product hierarchy - electronics (Phone, Laptop, Tablet),
+   foods (Fruit, Vegetable, Grain), or even game characters (Warrior, Mage, Archer).
+
+7. Connections
+   The abstract drive() method is similar to how interfaces work - it forces each
+   subclass to provide their own implementation. But unlike an interface, the abstract
+   class can also share working code (accelerate, brake) that all subclasses use.
+
+8. Improvement
+   Could add fuel cost calculation methods, a method to compare vehicles by
+   efficiency, or sort the CarLot by various criteria. Could also make Vehicle
+   implement Comparable to sort by year or price.
+
+9. Overall Reflection
+   This was my favorite exercise because the Vehicle hierarchy feels very real-world.
+   Using it through the CarLot with polymorphism showed me exactly why OOP exists -
+   managing different types through a common interface is so much cleaner than
+   separate arrays for each vehicle type.
+
+================================================================================
+REFLECTION - Mastery: Account / PersonalAcct / BusinessAcct / MyBank
+================================================================================
+
+1. Understanding the Problem
+   Extend the Account/Customer framework to include PersonalAcct and BusinessAcct
+   subclasses with different minimum balance penalties, plus a MyBank aggregation
+   class. The Customer class needed full address support with individual change
+   methods for each field.
+
+2. Planning the Solution
+   Customer gets the address fields and scanner-based change methods. Account uses
+   Customer through composition. PersonalAcct and BusinessAcct override withdrawal()
+   to add penalty checking. MyBank wraps everything in an aggregation pattern like
+   University and CarLot.
+
+3. Implementation
+   Made the penalty thresholds and fees into static final constants so they're easy
+   to find and change. The checkBalance() methods are private because external code
+   shouldn't trigger penalties manually - they happen automatically after withdrawals.
+   Both account types call super.withdrawal() for the actual money movement.
+
+4. Overcoming Challenges
+   Had a subtle bug where the penalty check was happening even when the withdrawal
+   was denied (insufficient funds). Fixed it by checking if the returned amount was
+   greater than 0 before running checkBalance(). Also initially had the "ur broke"
+   message which I cleaned up to be more professional.
+
+5. Learning
+   Method overriding is powerful when you want to ADD behavior on top of what the
+   parent does. PersonalAcct.withdrawal() doesn't replace Account.withdrawal() -
+   it calls super.withdrawal() and then adds the penalty check. This "extend
+   rather than replace" pattern is really clean.
+
+6. Application
+   Banks literally work this way. Different account types (checking, savings,
+   business, student) all share basic banking operations but have different rules
+   for fees, interest rates, and minimum balances.
+
+7. Connections
+   The composition between Account and Customer is different from the inheritance
+   between Account and PersonalAcct. Account HAS-A Customer but PersonalAcct IS-A
+   Account. Both relationships working together shows how OOP relationships
+   complement each other.
+
+8. Improvement
+   Could add interest calculation, transaction history, transfer between accounts,
+   monthly statements, or account types with interest (like savings). Could also
+   serialize accounts to save to file.
+
+9. Overall Reflection
+   The banking exercise tied everything together - inheritance (Account types),
+   composition (Account-Customer), aggregation (MyBank), and polymorphism (storing
+   different account types in one list). It's the most complete demonstration of
+   OOP concepts in this chapter.
