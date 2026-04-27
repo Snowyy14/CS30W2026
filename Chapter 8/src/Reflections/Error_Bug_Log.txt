@@ -1,0 +1,255 @@
+Chapter 8 - Error and Bug Log
+Object-Oriented Techniques
+Author: Ethan
+Date: April 16, 2026
+
+================================================================================
+PUCK PROGRAM - Error Log
+================================================================================
+
+Error Log Entry 1
+-----------------
+What error message did I encounter (if any)?
+   "constructor Circle in class Circle cannot be applied to given types"
+
+What unexpected behavior did my program exhibit?
+   The Puck class wouldn't compile at all. Eclipse was highlighting the super()
+   call in red with this error about the Circle constructor.
+
+What caused the issue?
+   I was passing the full diameter (3.0) to the Disk constructor which passes
+   it to Circle as the radius. But 3 inches is the DIAMETER, not the radius.
+   Circle expects a radius so I was making a puck twice as big as it should be.
+   The actual error was that I had the wrong number of arguments, but the root
+   cause was confusion about diameter vs radius.
+
+How did I fix the issue?
+   Changed the super() call in Puck to pass PUCK_DIAMETER / 2.0 instead of
+   just PUCK_DIAMETER. Now it correctly passes 1.5 as the radius to Disk/Circle.
+
+Error Log Entry 2
+-----------------
+What error message did I encounter (if any)?
+   "Puck is not abstract and does not override abstract method compareTo(Puck)"
+
+What unexpected behavior did my program exhibit?
+   After adding "implements Comparable<Puck>" to the Puck class header, the
+   whole class got a red underline and wouldn't compile.
+
+What caused the issue?
+   I added the implements Comparable<Puck> declaration but forgot to actually
+   write the compareTo() method. When a class implements an interface,
+   it HAS to provide all the methods the interface declares.
+
+How did I fix the issue?
+   Added the compareTo(Puck other) method that uses Double.compare() to
+   compare the weights. Also added the @Override annotation.
+
+Error Log Entry 3
+-----------------
+What error message did I encounter (if any)?
+   No compiler error, but wrong test output
+
+What unexpected behavior did my program exhibit?
+   When comparing two 5.5 oz pucks with equals(), it was returning false even
+   though they were clearly the same weight.
+
+What caused the issue?
+   My original equals() was using == to compare doubles, which doesn't work
+   reliably because of floating point precision. 5.5 stored in two different
+   variables might have slightly different internal representations.
+
+How did I fix the issue?
+   Changed the equals method to use Math.round(weight * 10) for both values
+   before comparing. This rounds to 1 decimal place which is precise enough
+   for puck weights and avoids the floating point issue.
+
+================================================================================
+RECTANGLE PROGRAM - Error Log
+================================================================================
+
+Error Log Entry 1
+-----------------
+What error message did I encounter (if any)?
+   "Rectangle is not abstract and does not override abstract method
+   compareToArea(Object) in ComparableArea"
+
+What unexpected behavior did my program exhibit?
+   After creating the ComparableArea interface and adding it to Rectangle's
+   implements clause, the class wouldn't compile.
+
+What caused the issue?
+   I defined the method as compareToArea(Rectangle other) but the interface
+   declared it as compareToArea(Object other). The parameter types have to
+   match exactly or Java doesn't consider it an implementation of the
+   interface method.
+
+How did I fix the issue?
+   Changed the parameter type to Object and added a cast inside the method:
+   Rectangle other = (Rectangle) obj. Also added an instanceof check first
+   for safety.
+
+Error Log Entry 2
+-----------------
+What error message did I encounter (if any)?
+   No error, but wrong output
+
+What unexpected behavior did my program exhibit?
+   The displayAreaFormula() method was working but I was calling it on an
+   instance (rect1.displayAreaFormula()) and Eclipse gave me a yellow warning.
+
+What caused the issue?
+   displayAreaFormula() is a static method (class method), so calling it on
+   an instance works but it's misleading - it looks like it depends on the
+   instance when it doesn't.
+
+How did I fix the issue?
+   Changed the call to Rectangle.displayAreaFormula() which makes it clear
+   that it's a class-level method that doesn't need any specific rectangle.
+
+================================================================================
+EMPLOYEE PROGRAM - Error Log
+================================================================================
+
+Error Log Entry 1
+-----------------
+What error message did I encounter (if any)?
+   "incompatible types: UEmployee cannot be converted to Faculty"
+
+What unexpected behavior did my program exhibit?
+   When trying to use findEmployee() in the University class to get a specific
+   Faculty member and call getDepartmentName() on them, the compiler rejected it.
+
+What caused the issue?
+   findEmployee() returns a UEmployee reference, not a Faculty reference. Even
+   though the actual object is a Faculty, the compiler only knows about the
+   declared return type. UEmployee doesn't have a getDepartmentName() method.
+
+How did I fix the issue?
+   Added a cast: Faculty f = (Faculty) uni.findEmployee("Dr. Smith") and used
+   an instanceof check before casting to avoid ClassCastException. This shows
+   why polymorphism sometimes requires casting when I need subclass-specific
+   methods.
+
+Error Log Entry 2
+-----------------
+What error message did I encounter (if any)?
+   NullPointerException at runtime
+
+What unexpected behavior did my program exhibit?
+   Program crashed when I tried to call toString() on the result of
+   findEmployee() with a name that didn't exist in the university.
+
+What caused the issue?
+   findEmployee() returns null when nobody matches, but I was calling .toString()
+   on the result without checking for null first. null.toString() = crash.
+
+How did I fix the issue?
+   Added a null check: if (found != null) before trying to use the returned
+   object. Always check for null when a method might return it.
+
+================================================================================
+VEHICLE PROGRAM - Error Log
+================================================================================
+
+Error Log Entry 1
+-----------------
+What error message did I encounter (if any)?
+   "Vehicle is abstract; cannot be instantiated"
+
+What unexpected behavior did my program exhibit?
+   I accidentally tried to create a Vehicle object directly in my test file
+   with "new Vehicle(...)" and it refused to compile.
+
+What caused the issue?
+   Vehicle is declared as abstract, which means I can't create objects of it
+   directly. Abstract classes are meant to be templates that concrete subclasses
+   fill in. I have to create a Car, Truck, or Minivan instead.
+
+How did I fix the issue?
+   Removed the direct Vehicle instantiation and only created Car, Truck, and
+   Minivan objects. Stored them in Vehicle references when needed for
+   polymorphism testing.
+
+Error Log Entry 2
+-----------------
+What error message did I encounter (if any)?
+   "constructor Vehicle in class Vehicle cannot be applied to given types"
+
+What unexpected behavior did my program exhibit?
+   After adding the four new fields (fuelEconomyCity, fuelEconomyHwy,
+   seatingCapacity, cargoVolume) to Vehicle, all three subclass files
+   immediately broke.
+
+What caused the issue?
+   The subclass constructors were still calling super() with the old 3-parameter
+   version (make, model, year). But since I changed Vehicle's constructor to
+   take 7 parameters, the old super() call no longer matched any constructor.
+
+How did I fix the issue?
+   Updated all three subclass constructors and their super() calls to include
+   the four new parameters. Also had to update every place in TestVehicle that
+   creates a Car/Truck/Minivan to pass the extra values.
+
+================================================================================
+ACCOUNT PROGRAM - Error Log
+================================================================================
+
+Error Log Entry 1
+-----------------
+What error message did I encounter (if any)?
+   "cannot reduce visibility of inherited method from Account"
+
+What unexpected behavior did my program exhibit?
+   When writing the withdrawal method override in PersonalAcct, Eclipse
+   marked the whole method with a red line and wouldn't compile.
+
+What caused the issue?
+   I accidentally left off the "public" keyword on the withdrawal method in
+   PersonalAcct. Without it, the method defaulted to package-private access,
+   which is less visible than the parent's public method. Java doesn't let
+   an overridden method be less visible than the original.
+
+How did I fix the issue?
+   Added "public" back to the method signature: public double withdrawal(double amt).
+   The @Override annotation helped catch this quickly.
+
+Error Log Entry 2
+-----------------
+What error message did I encounter (if any)?
+   No compiler error but logic bug
+
+What unexpected behavior did my program exhibit?
+   The penalty fee was being charged twice when opening a new PersonalAcct
+   with a balance under $100. The initial balance was $75 but after
+   construction it showed $71.
+
+What caused the issue?
+   The checkBalance() method was being called in the constructor, and it was
+   charging the penalty correctly. But then the withdrawal inside checkBalance()
+   triggered another balance check... which would charge again. It was a
+   recursive penalty loop.
+
+How did I fix the issue?
+   Made checkBalance() call super.withdrawal() instead of this.withdrawal()
+   so the fee withdrawal doesn't go through the overridden version that
+   triggers another check. This breaks the infinite loop.
+
+Error Log Entry 3
+-----------------
+What error message did I encounter (if any)?
+   NullPointerException
+
+What unexpected behavior did my program exhibit?
+   The Account's toString() crashed when I used the simple constructor
+   that only takes an ID string.
+
+What caused the issue?
+   The ID-only constructor was setting customer to null instead of creating
+   an empty Customer object. When toString() tried to call customer.toString(),
+   it hit a null reference.
+
+How did I fix the issue?
+   Changed the constructor to create a new Customer("", "") instead of leaving
+   customer as null. Now toString() can safely call customer.toString() even
+   when the customer has no real data.

@@ -1,0 +1,26 @@
+CRT Answers - chap 5
+
+1. Explain the difference between a has-a and is-a relationship among classes.
+is a means u inherit it like a car is a vehicle but has a means the class just has an object inside it like an account has a customer object 
+
+2. If a base class has a public method go() and a derived class has a public method stop(), which methods will be available to an object of the derived class?
+it gets both go() and stop()
+
+3. Compare and contrast implementing an abstract method to overriding a method.
+implementing an abstract method means u HAVE to do it cuz the abstract one is blank overriding is just when u want to change how a method works that u already inherited
+
+4. Compare and contrast an abstract class to an interface.
+abstract classes can have normal methods and variables but u can only inherit one of them interfaces r just empty methods but u can implement a ton of them
+
+6. 
+a) What type of method is doThat() in Wo?
+its an abstract method
+
+b) What is Wo?
+an interface
+
+c) Why is doThat() implemented in Roo?
+cuz roo implements the wo interface so it forces u to write the dothat code
+
+d) List the methods available to a Roo object.
+dothis and donow and dothat
